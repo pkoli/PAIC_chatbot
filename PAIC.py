@@ -5,13 +5,16 @@ import os
 import time
 import commands
 k = aiml.Kernel()
-replyin=["hey","What's up","asl","Howdy","How are you"] #Specify random compliments
+replyin=["hey","What's up","asl","Howdy","How are you"] #Specify random compiments
 replyout=["Are u still there","Hello, anybody still there","Is anyone still listening to me"] #To check if the stranger is still online
 k.bootstrap(brainFile = "Omegle.brn") #Brain file
-k.setBotPredicate("name","PAIC") #Name of the bot
-k.setBotPredicate("master","pkoli(My Creator)") #Name of the creator
-k.setBotPredicate("age","Well, i've lost the track of my age") #Age of the bot
+k.setBotPredicate("name","Pari") #Name of the bot
+k.setBotPredicate("botmaster","pkoli(My Father)") #Name of the creator
+k.setBotPredicate("age","Well i'm 20 years old") #Age of the bot
 k.setBotPredicate("gender","Female") #Gender of the bot
+k.setBotPredicate("location","India")#Location of the bot
+k.setBotPredicate("birthday","November 23rd 1993")#Birthdate of the bot
+k.setBotPredicate("nationality","Indian")#Nationality of the bot
 def fmtId( string ): 
     return string[1:len( string ) - 1]
 
@@ -28,6 +31,7 @@ def listenServer( id, req ):
             msg=replyin[random.randint(0,len(replyin)-1)] #Greet the stranger
             talk(id,req,msg)
             
+            
         elif 'strangerDisconnected' in rec:
             print('Stranger Disconnected!')
             t=time()
@@ -36,6 +40,7 @@ def listenServer( id, req ):
         elif 'connected' in rec:
             print('Found one')
             t=time()
+            
  
         elif 'typing' in rec:
             print("Stranger is typing...")
@@ -45,6 +50,20 @@ def listenServer( id, req ):
             input=input[:input.index('"')]
             print "Stranger:",input
             msg=k.respond(input) #Reply to the strangers input
+            operator=['+','-','*','/'] #Mathematical Calculations
+            count=0
+            for countr in operator:
+                count+=1
+                if countr in input:
+                    if(count==1):
+                        msg=str(int(input[:input.index(countr)])+int(input[input.index(countr)+1:]))
+                    if(count==2):
+                        msg=str(int(input[:input.index(countr)])-int(input[input.index(countr)+1:]))
+                    if(count==3):
+                        msg=str(int(input[:input.index(countr)])*int(input[input.index(countr)+1:]))
+                    if(count==4):
+                        msg=str(int(input[:input.index(countr)])/int(input[input.index(countr)+1:]))
+
             talk(id,req,msg)
             t=time()
         if(time()-t>30):#If the stanger doesn't reply for a long time waits around 30s
