@@ -6,4 +6,4 @@ It needs the Omegle.brn file to run, keep them in the same folder.
 AIML is used in creating this bot. PAIC and Omegle.brn must be in the same folder.
 
 
-The folder dist contains the executable, just download the entire folder and you won't need anything else. You still can change the knowledge base of the bot, just replace the brain file.
+The folder dist contains the executable, just download the entire folder and you won't need anything else. You still can change the knowledge base of the bot, just replace the brain file. Use botlearn.py to chanfe the brain file.
